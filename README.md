@@ -4,7 +4,7 @@ Um aplicativo web interativo inspirado no Chapéu Seletor de Harry Potter, que f
 
 Este projeto foi criado como um estudo prático de Python e da biblioteca Streamlit para desenvolvimento rápido de aplicações web.
 
-![Exemplo de Screenshot do App](URL_DA_SUA_IMAGEM_AQUI)  ## ✨ Funcionalidades
+## ✨ Funcionalidades
 
 - Quiz interativo com perguntas baseadas nas características das casas.
 - Sistema de pontuação que calcula a casa mais provável para o usuário.
@@ -22,7 +22,7 @@ Siga os passos abaixo para rodar o projeto localmente.
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+    git clone https://github.com/carloscampos2014/streamlit-sorting-hat.git
     cd SEU_REPOSITORIO
     ```
 
@@ -36,7 +36,6 @@ Siga os passos abaixo para rodar o projeto localmente.
     ```bash
     pip install -r requirements.txt
     ```
-    *(Não se esqueça de criar um arquivo `requirements.txt` com o comando `pip freeze > requirements.txt`)*
 
 4.  **Execute o aplicativo Streamlit:**
     ```bash
