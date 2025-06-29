@@ -1,4 +1,5 @@
 import streamlit as st
+import time
 
 # --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(
@@ -7,66 +8,69 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- LÓGICA E CONTEÚDO ---
+# --- ESTRUTURA DE DADOS DAS PERGUNTAS ---
+# Organizar as perguntas desta forma torna o código muito mais limpo.
+perguntas = [
+    {
+        "pergunta": "Qual qualidade você mais valoriza em si mesmo?",
+        "opcoes": ("Coragem", "Ambição", "Sabedoria", "Lealdade"),
+        "pontos": {
+            "Coragem": {"Grifinória": 2},
+            "Ambição": {"Sonserina": 2},
+            "Sabedoria": {"Corvinal": 2},
+            "Lealdade": {"Lufa-Lufa": 2}
+        }
+    },
+    {
+        "pergunta": "Se pudesse explorar qualquer lugar em Hogwarts, qual seria?",
+        "opcoes": ("A Floresta Proibida", "A Seção Restrita da biblioteca", "As cozinhas de Hogwarts", "A Sala Precisa"),
+        "pontos": {
+            "A Floresta Proibida": {"Grifinória": 2, "Sonserina": 1},
+            "A Seção Restrita da biblioteca": {"Corvinal": 2, "Sonserina": 1},
+            "As cozinhas de Hogwarts": {"Lufa-Lufa": 2},
+            "A Sala Precisa": {"Grifinória": 1, "Corvinal": 1, "Lufa-Lufa": 1}
+        }
+    },
+    {
+        "pergunta": "Qual dos seguintes você preferiria que as pessoas associassem a você após sua morte?",
+        "opcoes": ("Glória", "Sabedoria", "Amor", "Poder"),
+        "pontos": {
+            "Glória": {"Grifinória": 1, "Sonserina": 2},
+            "Sabedoria": {"Corvinal": 2},
+            "Amor": {"Lufa-Lufa": 2, "Grifinória": 1},
+            "Poder": {"Sonserina": 2}
+        }
+    },
+     {
+        "pergunta": "Você encontra uma carteira perdida na rua. O que você faz?",
+        "opcoes": ("Procura uma identificação para devolver ao dono.", "Leva a uma autoridade, como a polícia.", "Pega o dinheiro e deixa a carteira.", "Ignora e segue seu caminho."),
+        "pontos": {
+            "Procura uma identificação para devolver ao dono.": {"Lufa-Lufa": 2, "Grifinória": 1},
+            "Leva a uma autoridade, como a polícia.": {"Corvinal": 2, "Lufa-Lufa": 1},
+            "Pega o dinheiro e deixa a carteira.": {"Sonserina": 2},
+            "Ignora e segue seu caminho.": {} # Sem pontos
+        }
+    }
+]
 
-def calcular_resultado(respostas):
-    """Calcula a casa com base nas respostas do usuário."""
-    pontos = {"Grifinória": 0, "Sonserina": 0, "Corvinal": 0, "Lufa-Lufa": 0}
-
-    # Lógica de pontuação para cada pergunta
-    if respostas["q1"] == "Coragem":
-        pontos["Grifinória"] += 2
-    elif respostas["q1"] == "Ambição":
-        pontos["Sonserina"] += 2
-    elif respostas["q1"] == "Sabedoria":
-        pontos["Corvinal"] += 2
-    elif respostas["q1"] == "Lealdade":
-        pontos["Lufa-Lufa"] += 2
-
-    if respostas["q2"] == "A Floresta Proibida":
-        pontos["Grifinória"] += 2
-        pontos["Sonserina"] += 1
-    elif respostas["q2"] == "A Seção Restrita da biblioteca":
-        pontos["Corvinal"] += 2
-        pontos["Sonserina"] += 1
-    elif respostas["q2"] == "As cozinhas de Hogwarts":
-        pontos["Lufa-Lufa"] += 2
-    elif respostas["q2"] == "A Sala Precisa":
-        pontos["Grifinória"] += 1
-        pontos["Corvinal"] += 1
-
-    if respostas["q3"] == "Glória":
-        pontos["Sonserina"] += 2
-        pontos["Grifinória"] += 1
-    elif respostas["q3"] == "Sabedoria":
-        pontos["Corvinal"] += 2
-    elif respostas["q3"] == "Amor":
-        pontos["Lufa-Lufa"] += 2
-        pontos["Grifinória"] += 1
-    elif respostas["q3"] == "Poder":
-        pontos["Sonserina"] += 2
-
-    # Encontra a casa com a maior pontuação
-    casa_selecionada = max(pontos, key=pontos.get)
-    return casa_selecionada, pontos
-
+# --- FUNÇÕES AUXILIARES ---
 def exibir_resultado(casa):
     """Exibe o brasão e a descrição da casa selecionada."""
     casas_info = {
         "Grifinória": {
-            "brasao": "./imagens/Grifinoria.jpeg",
+            "brasao": "https://i.imgur.com/tS2vY_d.png",
             "descricao": "Parabéns! Você pertence à Grifinória, a casa dos bravos de coração, onde a ousadia, o nervo e o cavalheirismo prevalecem. Sua coragem é a sua maior virtude!"
         },
         "Sonserina": {
-            "brasao": "./imagens/Sonserina.jpeg",
+            "brasao": "https://i.imgur.com/m26gC_d.png",
             "descricao": "Parabéns! Você pertence à Sonserina, a casa dos astutos e ambiciosos. Você usa de qualquer meio para atingir os fins que estabeleceu e valoriza a grandeza."
         },
         "Corvinal": {
-            "brasao": "./imagens/Corvinal.jpeg",
+            "brasao": "https://i.imgur.com/dAzpY_d.png",
             "descricao": "Parabéns! Você pertence à Corvinal, a casa das mentes mais aguçadas. Para os de grande espírito e saber, a inteligência e a criatividade são tesouros."
         },
         "Lufa-Lufa": {
-            "brasao": "./imagens/LufaLufa.jpeg",
+            "brasao": "https://i.imgur.com/BDei8_d.png",
             "descricao": "Parabéns! Você pertence à Lufa-Lufa, onde seus membros são justos e leais. Pacientes, sinceros e sem medo da dor, a dedicação é sua marca registrada."
         }
     }
@@ -75,46 +79,58 @@ def exibir_resultado(casa):
     st.image(info["brasao"], width=200)
     st.success(info["descricao"])
     st.balloons()
+    time.sleep(3) # Pausa para os balões aparecerem bem
 
+# --- INICIALIZAÇÃO DO SESSION STATE ---
+if 'question_index' not in st.session_state:
+    st.session_state.question_index = 0
+    st.session_state.scores = {"Grifinória": 0, "Sonserina": 0, "Corvinal": 0, "Lufa-Lufa": 0}
 
-# --- INTERFACE DO USUÁRIO ---
-
+# --- LÓGICA PRINCIPAL DO APP ---
 st.title("🧙‍♂️ Chapéu Seletor de Hogwarts")
-st.markdown("Responda às perguntas com sinceridade para descobrir a qual casa você pertence.")
 
-respostas = {}
+# Verifica se o quiz já terminou
+if st.session_state.question_index < len(perguntas):
+    # Pega a pergunta atual
+    idx = st.session_state.question_index
+    pergunta_atual = perguntas[idx]
 
-# Pergunta 1
-st.subheader("1. Qual qualidade você mais valoriza em si mesmo?")
-respostas["q1"] = st.radio(
-    "Escolha uma opção:",
-    ("Coragem", "Ambição", "Sabedoria", "Lealdade"),
-    key="q1",
-    label_visibility="collapsed"
-)
+    st.subheader(f"Pergunta {idx + 1}/{len(perguntas)}")
+    st.write(f"### {pergunta_atual['pergunta']}")
 
-# Pergunta 2
-st.subheader("2. Se pudesse explorar qualquer lugar em Hogwarts, qual seria?")
-respostas["q2"] = st.radio(
-    "Escolha uma opção:",
-    ("A Floresta Proibida", "A Seção Restrita da biblioteca", "As cozinhas de Hogwarts", "A Sala Precisa"),
-    key="q2",
-    label_visibility="collapsed"
-)
+    # Cria o radio button para as opções
+    # A chave (key) é importante para o Streamlit identificar o widget
+    resposta = st.radio(
+        "Escolha sua resposta:",
+        pergunta_atual['opcoes'],
+        key=f"q{idx}"
+    )
 
-# Pergunta 3
-st.subheader("3. Qual dos seguintes você preferiria que as pessoas associassem a você após sua morte?")
-respostas["q3"] = st.radio(
-    "Escolha uma opção:",
-    ("Glória", "Sabedoria", "Amor", "Poder"),
-    key="q3",
-    label_visibility="collapsed"
-)
+    # Botão de próxima pergunta
+    if st.button("Próxima Pergunta"):
+        # Calcula os pontos da resposta escolhida
+        pontos_da_resposta = pergunta_atual['pontos'].get(resposta, {})
+        for casa, ponto in pontos_da_resposta.items():
+            st.session_state.scores[casa] += ponto
 
-st.write("---")
+        # Avança para a próxima pergunta
+        st.session_state.question_index += 1
+        st.rerun() # Re-executa o script para mostrar a próxima pergunta
 
-# Botão para iniciar a seleção
-if st.button("O Chapéu Seletor decide agora!"):
-    with st.spinner("Hmm, difícil, muito difícil... Vejo muita coragem... uma mente brilhante também... há talento... e uma sede de provar seu valor... mas onde devo colocá-lo?"):
-        casa_final, pontuacao = calcular_resultado(respostas)
-        exibir_resultado(casa_final)
+else:
+    # Se o quiz terminou, mostra o resultado
+    st.write("### O Chapéu Seletor ponderou suas respostas...")
+    
+    with st.spinner("Hmm, difícil, muito difícil... mas já sei onde colocá-lo..."):
+        time.sleep(3) # Simula o pensamento do chapéu
+
+    # Encontra a casa com a maior pontuação
+    casa_final = max(st.session_state.scores, key=st.session_state.scores.get)
+    exibir_resultado(casa_final)
+
+    # Botão para recomeçar o quiz
+    if st.button("Fazer o teste novamente"):
+        # Reseta o estado da sessão
+        st.session_state.question_index = 0
+        st.session_state.scores = {"Grifinória": 0, "Sonserina": 0, "Corvinal": 0, "Lufa-Lufa": 0}
+        st.rerun()
