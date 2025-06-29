@@ -58,19 +58,19 @@ def exibir_resultado(casa):
     """Exibe o brasão e a descrição da casa selecionada."""
     casas_info = {
         "Grifinória": {
-            "brasao": "https://i.imgur.com/tS2vY_d.png",
+            "brasao": "./imagens/Grifinoria.jpeg",
             "descricao": "Parabéns! Você pertence à Grifinória, a casa dos bravos de coração, onde a ousadia, o nervo e o cavalheirismo prevalecem. Sua coragem é a sua maior virtude!"
         },
         "Sonserina": {
-            "brasao": "https://i.imgur.com/m26gC_d.png",
+            "brasao": "./imagens/Sonserina.jpeg",
             "descricao": "Parabéns! Você pertence à Sonserina, a casa dos astutos e ambiciosos. Você usa de qualquer meio para atingir os fins que estabeleceu e valoriza a grandeza."
         },
         "Corvinal": {
-            "brasao": "https://i.imgur.com/dAzpY_d.png",
+            "brasao": "./imagens/Corvinal.jpeg",
             "descricao": "Parabéns! Você pertence à Corvinal, a casa das mentes mais aguçadas. Para os de grande espírito e saber, a inteligência e a criatividade são tesouros."
         },
         "Lufa-Lufa": {
-            "brasao": "https://i.imgur.com/BDei8_d.png",
+            "brasao": "./imagens/LufaLufa.jpeg",
             "descricao": "Parabéns! Você pertence à Lufa-Lufa, onde seus membros são justos e leais. Pacientes, sinceros e sem medo da dor, a dedicação é sua marca registrada."
         }
     }
