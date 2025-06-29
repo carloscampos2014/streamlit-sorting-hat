@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+from perguntas import DADOS_QUIZ
 
 # --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(
@@ -7,51 +8,6 @@ st.set_page_config(
     page_icon="🧙‍♂️",
     layout="centered"
 )
-
-# --- ESTRUTURA DE DADOS DAS PERGUNTAS ---
-# Organizar as perguntas desta forma torna o código muito mais limpo.
-perguntas = [
-    {
-        "pergunta": "Qual qualidade você mais valoriza em si mesmo?",
-        "opcoes": ("Coragem", "Ambição", "Sabedoria", "Lealdade"),
-        "pontos": {
-            "Coragem": {"Grifinória": 2},
-            "Ambição": {"Sonserina": 2},
-            "Sabedoria": {"Corvinal": 2},
-            "Lealdade": {"Lufa-Lufa": 2}
-        }
-    },
-    {
-        "pergunta": "Se pudesse explorar qualquer lugar em Hogwarts, qual seria?",
-        "opcoes": ("A Floresta Proibida", "A Seção Restrita da biblioteca", "As cozinhas de Hogwarts", "A Sala Precisa"),
-        "pontos": {
-            "A Floresta Proibida": {"Grifinória": 2, "Sonserina": 1},
-            "A Seção Restrita da biblioteca": {"Corvinal": 2, "Sonserina": 1},
-            "As cozinhas de Hogwarts": {"Lufa-Lufa": 2},
-            "A Sala Precisa": {"Grifinória": 1, "Corvinal": 1, "Lufa-Lufa": 1}
-        }
-    },
-    {
-        "pergunta": "Qual dos seguintes você preferiria que as pessoas associassem a você após sua morte?",
-        "opcoes": ("Glória", "Sabedoria", "Amor", "Poder"),
-        "pontos": {
-            "Glória": {"Grifinória": 1, "Sonserina": 2},
-            "Sabedoria": {"Corvinal": 2},
-            "Amor": {"Lufa-Lufa": 2, "Grifinória": 1},
-            "Poder": {"Sonserina": 2}
-        }
-    },
-     {
-        "pergunta": "Você encontra uma carteira perdida na rua. O que você faz?",
-        "opcoes": ("Procura uma identificação para devolver ao dono.", "Leva a uma autoridade, como a polícia.", "Pega o dinheiro e deixa a carteira.", "Ignora e segue seu caminho."),
-        "pontos": {
-            "Procura uma identificação para devolver ao dono.": {"Lufa-Lufa": 2, "Grifinória": 1},
-            "Leva a uma autoridade, como a polícia.": {"Corvinal": 2, "Lufa-Lufa": 1},
-            "Pega o dinheiro e deixa a carteira.": {"Sonserina": 2},
-            "Ignora e segue seu caminho.": {} # Sem pontos
-        }
-    }
-]
 
 # --- FUNÇÕES AUXILIARES ---
 def exibir_resultado(casa):
@@ -90,12 +46,12 @@ if 'question_index' not in st.session_state:
 st.title("🧙‍♂️ Chapéu Seletor de Hogwarts")
 
 # Verifica se o quiz já terminou
-if st.session_state.question_index < len(perguntas):
+if st.session_state.question_index < len(DADOS_QUIZ):
     # Pega a pergunta atual
     idx = st.session_state.question_index
-    pergunta_atual = perguntas[idx]
+    pergunta_atual = DADOS_QUIZ[idx]
 
-    st.subheader(f"Pergunta {idx + 1}/{len(perguntas)}")
+    st.subheader(f"Pergunta {idx + 1}/{len(DADOS_QUIZ)}")
     st.write(f"### {pergunta_atual['pergunta']}")
 
     # Cria o radio button para as opções
