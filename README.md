@@ -26,11 +26,13 @@ O projeto foi desenvolvido como um exercício prático de Python e Streamlit, de
 
 Siga os passos abaixo para rodar o Chapéu Seletor em sua máquina:
 
-1. **Clone o repositório:**```bash
+1. **Clone o repositório:**
+```bash
 git clone https://github.com/carloscampos2014/streamlit-sorting-hat.git
     cd streamlit-sorting-hat
 ```
-2. **(Opcional) Crie um ambiente virtual:**```bash
+2. **(Opcional) Crie um ambiente virtual:**
+```bash
 python -m venv venv
 # Ative o ambiente virtual:
 # No Windows:
@@ -38,10 +40,12 @@ venv\Scripts\activate
 # No Linux/Mac:
 source venv/bin/activate
 ```
-3. **Instale as dependências:**```bash
+3. **Instale as dependências:**
+```bash
 pip install -r requirements.txt
 ```
-4. **Execute o aplicativo:**```bash
+4. **Execute o aplicativo:**
+```bash
 streamlit run chapeu_seletor.py
 ```
 5. **Acesse no navegador:**
