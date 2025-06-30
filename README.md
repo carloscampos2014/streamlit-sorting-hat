@@ -1,49 +1,70 @@
-# 🧙‍♂️ Projeto Chapéu Seletor com Streamlit
+# 🧙‍♂️ Chapéu Seletor de Hogwarts com Streamlit
 
-Um aplicativo web interativo inspirado no Chapéu Seletor de Harry Potter, que faz perguntas ao usuário para determinar a qual casa de Hogwarts ele pertence: Grifinória, Lufa-Lufa, Corvinal ou Sonserina.
+Este é um aplicativo web interativo inspirado no Chapéu Seletor do universo Harry Potter. O objetivo é descobrir, por meio de um quiz, a qual casa de Hogwarts (Grifinória, Lufa-Lufa, Corvinal ou Sonserina) o usuário pertence, com base em suas respostas.
 
-Este projeto foi criado como um estudo prático de Python e da biblioteca Streamlit para desenvolvimento rápido de aplicações web.
+O projeto foi desenvolvido como um exercício prático de Python e Streamlit, demonstrando como criar aplicações web rápidas, dinâmicas e divertidas.
+
+---
 
 ## ✨ Funcionalidades
 
-- Quiz interativo com perguntas baseadas nas características das casas.
-- Sistema de pontuação que calcula a casa mais provável para o usuário.
-- Exibição do resultado com o brasão e a descrição da casa.
-- Interface amigável e divertida criada com Streamlit.
+- **Quiz Personalizado:** Perguntas baseadas nos valores e características das casas de Hogwarts.
+- **Sistema de Pontuação:** Cada resposta soma pontos para uma ou mais casas, determinando a afinidade do usuário.
+- **Resultado Interativo:** Exibição do brasão, nome e descrição da casa sorteada, tornando a experiência mais imersiva.
+- **Interface Intuitiva:** Layout simples, responsivo e fácil de usar, criado com Streamlit.
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **[Python](https://www.python.org/)** - Linguagem de programação principal.
-* **[Streamlit](https://streamlit.io/)** - Framework para a criação da interface web.
+- **[Python](https://www.python.org/):** Linguagem principal do projeto.
+- **[Streamlit](https://streamlit.io/):** Framework para desenvolvimento de interfaces web de forma rápida e interativa.
 
-## 🚀 Como Executar o Projeto
+---
 
-Siga os passos abaixo para rodar o projeto localmente.
+## 🚀 Como Executar o Projeto Localmente
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/carloscampos2014/streamlit-sorting-hat.git
-    cd SEU_REPOSITORIO
-    ```
+Siga os passos abaixo para rodar o Chapéu Seletor em sua máquina:
 
-2.  **Crie um ambiente virtual (Recomendado):**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # No Windows: venv\Scripts\activate
-    ```
+1. **Clone o repositório:**```bash
+git clone https://github.com/carloscampos2014/streamlit-sorting-hat.git
+    cd streamlit-sorting-hat
+```
+2. **(Opcional) Crie um ambiente virtual:**```bash
+python -m venv venv
+# Ative o ambiente virtual:
+# No Windows:
+venv\Scripts\activate
+# No Linux/Mac:
+source venv/bin/activate
+```
+3. **Instale as dependências:**```bash
+pip install -r requirements.txt
+```
+4. **Execute o aplicativo:**```bash
+streamlit run chapeu_seletor.py
+```
+5. **Acesse no navegador:**
+    Abra [http://localhost:8501](http://localhost:8501) para interagir com o quiz.
 
-3.  **Instale as dependências:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+---
 
-4.  **Execute o aplicativo Streamlit:**
-    ```bash
-    streamlit run chapeu_seletor.py
-    ```
+## 📁 Estrutura dos Arquivos
 
-Abra seu navegador e acesse `http://localhost:8501`.
+- `chapeu_seletor.py`: Código principal do aplicativo Streamlit.
+- `perguntas.py`: Lista de perguntas e lógica de pontuação.
+- `requirements.txt`: Dependências do projeto.
+- `README.md`: Este arquivo de instruções.
+- `LICENSE`: Licença do projeto.
+
+---
+
+## ❓ Dúvidas ou Sugestões
+
+Fique à vontade para abrir uma _issue_ ou enviar um _pull request_ com melhorias, correções ou sugestões.
+
+---
 
 ## 📄 Licença
 
-Este projeto é distribuído sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Distribuído sob a licença MIT. Consulte o arquivo `LICENSE` para mais informações.
